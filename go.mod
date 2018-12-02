@@ -1,1 +1,1 @@
-module "github.com/fhs/gompd/v2"
+module github.com/ghetzel/gompd

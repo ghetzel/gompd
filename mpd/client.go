@@ -83,6 +83,10 @@ func DialAuthenticated(network, addr, password string) (c *Client, err error) {
 // the original functions append CR-LF to the end of commands. This behavior
 // violates the MPD protocol: Commands must be terminated by '\n'.
 func (c *Client) cmd(format string, args ...interface{}) (uint, error) {
+	if c.text == nil {
+		return 0, fmt.Errorf("connection unavailable")
+	}
+
 	id := c.text.Next()
 	c.text.StartRequest(id)
 	defer c.text.EndRequest(id)
